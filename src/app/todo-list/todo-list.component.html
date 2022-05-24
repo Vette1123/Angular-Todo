@@ -1,0 +1,48 @@
+<div class="overflow-x-auto">
+  <input
+    type="text"
+    placeholder="Type here to add a new todo"
+    class="input input-bordered input-primary w-full max-w-xs my-12"
+    #todo
+  />
+  <button class="btn mx-12" value="Add" (click)="add(todo)">Add</button>
+  <span class="mr-12">Filter todos</span>
+  <input
+    type="text"
+    placeholder="Type here to add a new todo"
+    class="input input-bordered input-primary w-full max-w-xs my-12"
+    #todoFilter
+  />
+  <button
+    class="btn mx-12"
+    value="Filter"
+    (click)="searchTodos(todoFilter.value)"
+  >
+    Filter
+  </button>
+
+  <table class="table w-full">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- row 1 -->
+      <tr *ngFor="let todo of filteredTodos">
+        <td>{{ todo.name }}</td>
+        <td>
+          <button
+            class="btn btn-error"
+            value="Delete"
+            (click)="delete(todo.id)"
+          >
+            Complete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
