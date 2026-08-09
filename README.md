@@ -1,27 +1,73 @@
-# Day2
+# Angular Todo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.6.
+A small todo application built to get an honest feel for Angular — written
+after a long stretch in React, on a problem simple enough that the only
+variable is the framework.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Add a task, mark it complete, delete it
+- Completed tasks render struck through rather than disappearing
+- Component-scoped styles, no global CSS beyond the Tailwind and daisyUI setup
 
-## Code scaffolding
+## Stack
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+| | |
+| --- | --- |
+| Framework | Angular 13 |
+| Language | TypeScript |
+| Styling | Tailwind CSS + [daisyUI](https://daisyui.com) |
+| Tooling | Angular CLI |
 
-## Build
+## Layout
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+src/app/
+├── app.component.*        # shell
+├── app.module.ts          # root module, declarations and imports
+├── app-routing.module.ts  # router config
+└── todo-list/             # the feature: list, item, and its state
+```
 
-## Running unit tests
+## Notes for anyone coming from React
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The feature list is the boring part. The reason this repo exists is the shape
+of the framework around it:
 
-## Running end-to-end tests
+- **A component is four files, not one function.** `ng generate component`
+  emits a class, a template, a stylesheet and a spec. React would have handed
+  you a function and left the rest to you. Neither is wrong; they optimise for
+  different team sizes.
+- **State lives in a service, injected through the constructor.** There is no
+  hook and no provider tree to thread — you declare what you need as a
+  constructor parameter and the framework resolves it. Dependency injection is
+  the framework's, not a library you chose.
+- **Modules are explicit.** A component does not exist until it is declared in
+  an `NgModule`. Forgetting that is the single most common first-day error, and
+  the error message says exactly what to do about it.
+- **Templates are their own language.** `*ngFor`, `*ngIf` and `[(ngModel)]` are
+  compiled, not JavaScript expressions, so the type checker sees through them
+  but your editor's JS tooling does not.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+daisyUI sits on top of Tailwind so none of the effort went into writing
+component CSS.
 
-## Further help
+## Running locally
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+git clone https://github.com/Vette1123/Angular-Todo.git
+cd Angular-Todo
+npm install
+ng serve
+```
+
+Then open `http://localhost:4200`. The app reloads on save.
+
+```bash
+ng build     # production build into dist/
+ng test      # unit tests via Karma
+```
+
+---
+
+Built by [Mohamed Gado](https://mohamedgado.com) · 2022
