@@ -1,8 +1,7 @@
 # Angular Todo
 
-A small todo application built to get an honest feel for Angular — written
-after a long stretch in React, on a problem simple enough that the only
-variable is the framework.
+A small todo application I built to get a feel for Angular after a long stretch
+in React. The problem is simple enough that the framework is the only variable.
 
 ## Features
 
@@ -31,7 +30,7 @@ src/app/
 
 ## How it works
 
-State is held directly on `TodoListComponent` — two arrays, the full list and
+State is held directly on `TodoListComponent`: two arrays, the full list and
 the filtered view, with the template bound to the filtered one:
 
 ```ts
@@ -54,38 +53,37 @@ export class TodoListComponent implements OnInit {
 
 ## Known limitations
 
-Kept visible rather than tidied away — this was a first pass at the framework:
+This was a first pass at the framework, so these are left as they are:
 
 - **No service, no dependency injection.** State sits on the component and the
-  constructor is empty. That is the one Angular idea this project does *not*
+  constructor is empty. This is the one Angular idea the project does not
   demonstrate, and the first thing to change if it grows past one screen.
 - **`any[]` in a TypeScript project.** A `Todo` interface with `id` and `name`
   costs three lines and would make the template type-checked.
 - **`id` is `todos.length`.** Delete something, add something, and two items
-  share an id — after which delete removes both.
+  share an id, and then delete removes both.
 - **State is not persisted.** A refresh empties the list.
 - **No completion state.** Tasks are added, filtered and deleted; there is no
   done flag.
 
 ## Notes for anyone coming from React
 
-The feature list is the boring part. The reason this repo exists is the shape
-of the framework around it:
+The repo exists to look at the shape of the framework, not the feature list:
 
-- **A component is four files, not one function.** `ng generate component`
-  emits a class, a template, a stylesheet and a spec. React would have handed
-  you a function and left the rest to you.
+- **A component is four files.** `ng generate component`
+  emits a class, a template, a stylesheet and a spec, where React gives you a
+  function.
 - **Modules are explicit.** A component does not exist until it is declared in
-  an `NgModule`. Forgetting that is the most common first-day error, and the
-  message says exactly what to do about it.
+  an `NgModule`. Forgetting that is a common first-day error, and the
+  message says what to do about it.
 - **Templates are their own language.** `*ngFor`, `*ngIf` and `[(ngModel)]` are
-  compiled rather than evaluated as JavaScript, so the Angular compiler sees
-  through them but ordinary JS tooling does not.
+  compiled rather than evaluated as JavaScript, so the Angular compiler understands
+  them but ordinary JS tooling does not.
 - **Mutation is fine.** `this.todos.push(...)` updates the view. Angular's
   change detection re-reads the binding; there is no new-array requirement the
   way React's referential equality check demands one.
 
-daisyUI sits on top of Tailwind so none of the effort went into component CSS.
+daisyUI sits on top of Tailwind, so I wrote almost no component CSS.
 
 ## Running locally
 
